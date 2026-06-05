@@ -3,361 +3,274 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Story of Hina</title>
+<title>fil memories | Hina</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Homemade+Apple&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Homemade+Apple&family=Noto+Serif+JP:wght@200;300&display=swap');
 
-*{ box-sizing:border-box; }
+*{box-sizing:border-box;}
 
 body{
   margin:0;
-  color:#75685b;
-  font-family:"Cormorant Garamond","Yu Mincho",serif;
-  background:#f1eadf;
+  background:#fbfaf6;
+  color:#766f67;
+  font-family:"Noto Serif JP",serif;
 }
 
-.linen{
+.page{
   min-height:100vh;
-  padding:42px 24px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,.5), transparent 28%),
-    linear-gradient(135deg, rgba(255,255,255,.28) 0 1px, transparent 1px 8px),
-    linear-gradient(45deg, rgba(170,150,125,.08) 0 1px, transparent 1px 9px),
-    #f4eee4;
-}
-
-.scene{
-  width:100%;
-  max-width:430px;
-  min-height:760px;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.book-shadow{
-  position:absolute;
-  width:260px;
-  height:350px;
-  background:rgba(96,76,55,.14);
-  filter:blur(28px);
-  transform:translate(18px, 28px);
-  border-radius:6px;
-}
-
-.book{
-  width:250px;
-  height:340px;
-  position:relative;
-  perspective:1200px;
-  transform:rotate(-2deg);
-}
-
-.cover{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(90deg, rgba(160,145,120,.22), transparent 10%),
-    repeating-linear-gradient(90deg, rgba(140,120,90,.045) 0 1px, transparent 1px 5px),
-    #fbf8f1;
-  border:1px solid #d8cab7;
-  box-shadow:0 25px 50px rgba(70,50,30,.16);
-  transform-origin:left;
-  transition:1.4s ease;
-  z-index:3;
+  padding:70px 28px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:28px;
 }
 
-.book.open .cover{
-  transform:rotateY(-140deg);
-}
-
-.back-page{
-  position:absolute;
-  inset:6px -6px -6px 8px;
-  background:#fffdf8;
-  border:1px solid #e1d6c8;
-  box-shadow:0 18px 35px rgba(80,60,40,.12);
-  z-index:1;
-}
-
-.page{
-  position:absolute;
-  inset:4px;
-  background:#fffdf8;
-  border:1px solid #e4d8c9;
-  z-index:2;
-  transform-origin:left;
-  transition:1.2s ease;
-}
-
-.book.open .page{
-  transform:rotateY(-22deg);
-}
-
-.brand{
-  font-size:13px;
-  letter-spacing:.32em;
-  font-weight:300;
-}
-
-.title{
-  font-size:54px;
-  font-weight:300;
-  margin:48px 0 10px;
-}
-
-.sub{
-  font-size:14px;
-  letter-spacing:.24em;
-}
-
-.date{
-  font-size:15px;
-  margin-top:42px;
-}
-
-.hand{
-  font-family:"Homemade Apple", cursive;
-  color:#8d8a61;
-  font-size:21px;
-  line-height:1.8;
-  margin-top:30px;
-}
-
-.password-area{
-  position:absolute;
-  bottom:-145px;
+.cover-img{
   width:100%;
-  text-align:center;
+  max-width:430px;
+  border-radius:2px;
+  box-shadow:0 20px 55px rgba(70,50,30,.16);
+}
+
+.name{
+  margin-top:22px;
+  font-family:"Noto Serif JP",serif;
+  font-size:14px;
+  letter-spacing:.34em;
+  font-weight:200;
+}
+
+.pass{
+  margin-top:44px;
 }
 
 input{
-  width:210px;
+  width:170px;
   border:none;
-  border-bottom:1px solid #b8a995;
+  border-bottom:1px solid #c8bba9;
   background:transparent;
   text-align:center;
   padding:10px;
-  font-size:18px;
-  color:#75685b;
+  font-size:15px;
+  letter-spacing:.2em;
+  color:#766f67;
   outline:none;
 }
 
 button{
   margin-top:24px;
-  padding:13px 38px;
-  border-radius:999px;
-  border:1px solid #9d8b75;
-  background:#aa987f;
-  color:white;
-  letter-spacing:.22em;
-  font-size:13px;
+  border:none;
+  background:transparent;
+  font-family:"Cormorant Garamond",serif;
+  font-size:18px;
+  letter-spacing:.24em;
+  color:#766f67;
 }
 
-#pages{
+#book{
   display:none;
-  animation:fadeIn 1s ease forwards;
 }
 
-@keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
+.en-hand{
+  font-family:"Homemade Apple",cursive;
+  color:#7f8464;
+  font-size:20px;
+  line-height:1.7;
+  margin-bottom:42px;
 }
 
-section{
-  min-height:100vh;
-  padding:72px 28px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  background:#fbf8f1;
-}
-
-h2{
-  font-size:42px;
+.en-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:44px;
   font-weight:300;
-  margin:0 0 28px;
-}
-
-p{
-  font-size:19px;
-  line-height:2.1;
-  margin:0;
+  letter-spacing:.03em;
+  margin:0 0 56px;
 }
 
 .photo{
   width:100%;
-  max-width:330px;
+  max-width:340px;
   aspect-ratio:4/5;
-  background:#eee4d8;
-  border:1px solid #dfd1bf;
+  background:#ebe4da;
+  border:1px solid #d8cdbf;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#aaa;
-  margin:34px auto;
+  color:#b5ada5;
+  font-family:"Cormorant Garamond",serif;
+  font-size:18px;
+  letter-spacing:.24em;
+  margin-bottom:46px;
+  overflow:hidden;
+}
+
+.photo.wide{
+  aspect-ratio:4/3;
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.jp{
   font-size:14px;
-  letter-spacing:.15em;
+  font-weight:200;
+  letter-spacing:.28em;
+  line-height:3.1;
+  color:#77716a;
 }
 
 .grid{
+  width:100%;
+  max-width:360px;
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:14px;
-  width:100%;
-  max-width:360px;
-  margin-top:34px;
+  margin-bottom:54px;
 }
 
 .grid .photo{
   margin:0;
-  aspect-ratio:1/1.25;
+  aspect-ratio:1/1.15;
 }
 
 .letter{
+  width:100%;
   max-width:360px;
-  background:#fffdf9;
-  border:1px solid #e4d8c9;
-  padding:44px 26px;
+  border:1px solid #ddd2c5;
+  padding:46px 24px;
+  background:#fffdfa;
 }
 
-.end{
-  font-family:"Homemade Apple", cursive;
-  font-size:34px;
-  color:#8d8a61;
+.logo{
+  font-family:"Homemade Apple",cursive;
+  font-size:20px;
+  color:#8c8578;
+  margin-top:50px;
+}
+
+.small{
+  font-size:10px;
+  letter-spacing:.14em;
+  margin-top:12px;
+  color:#aaa39a;
 }
 
 @media(max-width:480px){
-  .linen{ padding:34px 20px; }
-  .scene{ min-height:700px; }
-  .book{
-    width:225px;
-    height:310px;
-  }
-  .book-shadow{
-    width:230px;
-    height:320px;
-  }
-  .title{ font-size:48px; }
-  .hand{ font-size:19px; }
+  .page{padding:64px 24px;}
+  .en-title{font-size:40px;margin-bottom:48px;}
+  .jp{font-size:13px;letter-spacing:.24em;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="linen">
-  <div class="scene">
+<section class="page" id="cover">
+  <img class="cover-img" src="images/cover.jpg" alt="fil memories cover">
 
-    <div class="book-shadow"></div>
+  <div class="name">Hina</div>
 
-    <div class="book" id="bookCover">
-      <div class="back-page"></div>
-      <div class="page"></div>
-
-      <div class="cover">
-        <div class="brand">fil memories</div>
-        <h1 class="title">Hina</h1>
-        <div class="sub">first birthday</div>
-        <div class="date">2026.06.05</div>
-        <div class="hand">tiny miracles</div>
-      </div>
-
-      <div class="password-area">
-        <input id="pw" placeholder="password">
-        <br>
-        <button onclick="openBook()">open book</button>
-      </div>
-    </div>
-
+  <div class="pass">
+    <input id="pw" placeholder="password">
+    <br>
+    <button onclick="openBook()">open book</button>
   </div>
-</div>
+</section>
 
-<div id="pages">
+<div id="book">
 
-<section>
-  <div class="hand">
+<section class="page">
+  <div class="en-hand">
     a year filled<br>
     with tiny miracles
   </div>
 
-  <div class="photo">main photo</div>
+  <div class="photo">
+    main photo
+  </div>
 
-  <p>
-    This is the story<br>
-    of Hina's first year.<br><br>
-    A collection of little moments,<br>
-    gentle smiles,<br>
-    and memories to treasure forever.
-  </p>
+  <div class="jp">
+    これは、ひなのはじめての１年のものがたり。<br><br>
+    ささやかな瞬間、やさしい笑顔、<br><br>
+    ずっと大切にしたい思い出たちを、<br><br>
+    ぎゅっと詰め込んで。
+  </div>
 </section>
 
-<section>
-  <h2>the beginning</h2>
-  <div class="photo">photo 01</div>
-  <p>
-    once upon a time,<br>
-    our story began.
-  </p>
+<section class="page">
+  <h2 class="en-title">the beginning</h2>
+
+  <div class="photo">
+    photo 01
+  </div>
+
+  <div class="jp">
+    むかしむかし、ある小さな命が生まれました。<br><br>
+    それは、たくさんの愛に包まれた、<br><br>
+    かけがえのない物語のはじまり。
+  </div>
 </section>
 
-<section>
-  <h2>little smiles</h2>
+<section class="page">
+  <h2 class="en-title">little smiles</h2>
+
   <div class="grid">
     <div class="photo">photo 02</div>
     <div class="photo">photo 03</div>
     <div class="photo">photo 04</div>
     <div class="photo">photo 05</div>
   </div>
-</section>
 
-<section>
-  <h2>tiny adventures</h2>
-  <div class="photo">photo 06</div>
-  <p>
-    every day brought<br>
-    something new.
-  </p>
-</section>
-
-<section>
-  <div class="letter">
-    <h2>A Letter<br>From Mama</h2>
-    <p>
-      Dear Hina,<br><br>
-      Happy first birthday.<br><br>
-      Thank you for coming into our lives<br>
-      and filling our days with happiness.<br><br>
-      Watching you grow<br>
-      has been the greatest joy.<br><br>
-      We love you<br>
-      more than words can say.<br><br>
-      Love,<br>
-      Mama
-    </p>
+  <div class="jp">
+    小さな笑顔のひとつひとつが、<br><br>
+    私たちの毎日を<br><br>
+    やさしく彩ってくれました。
   </div>
 </section>
 
-<section>
-  <div class="end">The End</div>
-  <p style="margin-top:34px;">
-    with all our love<br>
-    fil photo studio
-  </p>
-  <button>download</button>
+<section class="page">
+  <div class="jp" style="margin-bottom:44px;">
+    小さな冒険が、<br><br>
+    世界をもっと広げてくれた。
+  </div>
+
+  <div class="photo">
+    photo 06
+  </div>
+
+  <div class="jp">
+    毎日が、はじめての連続。<br><br>
+    その一歩一歩が、<br><br>
+    かけがえのない宝物になりました。
+  </div>
+</section>
+
+<section class="page">
+  <h2 class="en-title">mama's letter</h2>
+
+  <div class="letter">
+    <div class="jp">
+      ひなちゃんへ<br><br>
+      生まれてきてくれてありがとう。<br><br>
+      あなたの笑顔も、泣き顔も、<br><br>
+      小さな成長のひとつひとつも、<br><br>
+      ママの大切な宝物です。<br><br>
+      これからも、ひなちゃんらしく<br><br>
+      すくすく大きくなってね。
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="en-hand">the end</div>
+
+  <div class="logo">fil memories</div>
+  <div class="small">© fil memories. all rights reserved.</div>
 </section>
 
 </div>
@@ -367,13 +280,8 @@ function openBook(){
   const password = document.getElementById("pw").value;
 
   if(password === "hina"){
-    document.getElementById("bookCover").classList.add("open");
-
-    setTimeout(function(){
-      document.getElementById("pages").style.display = "block";
-      document.getElementById("pages").scrollIntoView({behavior:"smooth"});
-    },1400);
-
+    document.getElementById("book").style.display = "block";
+    document.getElementById("book").scrollIntoView({behavior:"smooth"});
   }else{
     alert("合言葉が違います");
   }
