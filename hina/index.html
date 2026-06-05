@@ -8,13 +8,141 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Homemade+Apple&display=swap');
 
-*{ box-sizing:border-box; }
+*{box-sizing:border-box;}
 
 body{
   margin:0;
-  background:#f3eadf;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.8), transparent 30%),
+    linear-gradient(135deg,#f6f1e8,#ebe1d3);
   color:#75685b;
   font-family:"Cormorant Garamond","Yu Mincho",serif;
+}
+
+.stage{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:34px 22px;
+}
+
+.table{
+  width:100%;
+  max-width:430px;
+  min-height:760px;
+  background:#fbf8f1;
+  border:1px solid #e2d6c8;
+  box-shadow:0 30px 80px rgba(95,75,52,.12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.book{
+  width:230px;
+  height:310px;
+  background:#fdfbf7;
+  border:1px solid #d9cdbc;
+  box-shadow:16px 20px 35px rgba(80,60,40,.12);
+  position:relative;
+  transform-style:preserve-3d;
+  transition:1.2s ease;
+}
+
+.book.open{
+  transform:rotateY(-18deg) translateX(-12px);
+}
+
+.cover{
+  position:absolute;
+  inset:0;
+  background:#fdfbf7;
+  border-left:5px solid #ddd1c2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:1.2s ease;
+  transform-origin:left;
+  z-index:2;
+}
+
+.book.open .cover{
+  transform:rotateY(-125deg);
+}
+
+.brand{
+  font-size:13px;
+  letter-spacing:.32em;
+  margin-bottom:44px;
+}
+
+.title{
+  font-size:48px;
+  font-weight:300;
+  margin:0;
+}
+
+.sub{
+  font-size:13px;
+  letter-spacing:.24em;
+  margin-top:14px;
+}
+
+.flower{
+  margin-top:38px;
+  font-family:"Homemade Apple", cursive;
+  font-size:26px;
+  color:#99936a;
+}
+
+.inside{
+  position:absolute;
+  inset:0;
+  padding:34px 22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+  background:#fffdf9;
+}
+
+.hand{
+  font-family:"Homemade Apple", cursive;
+  color:#8d8a61;
+  font-size:23px;
+  line-height:1.8;
+}
+
+input{
+  margin-top:34px;
+  width:190px;
+  border:none;
+  border-bottom:1px solid #b8a995;
+  background:transparent;
+  text-align:center;
+  padding:10px;
+  font-size:18px;
+  color:#75685b;
+  outline:none;
+}
+
+button{
+  margin-top:26px;
+  padding:13px 34px;
+  border-radius:999px;
+  border:1px solid #9d8b75;
+  background:#aa987f;
+  color:white;
+  letter-spacing:.22em;
+  font-size:13px;
+}
+
+#pages{
+  display:none;
 }
 
 section{
@@ -25,32 +153,7 @@ section{
   align-items:center;
   justify-content:center;
   text-align:center;
-}
-
-.cover{
   background:#fbf8f1;
-  margin:24px;
-  border:1px solid #e4d8c9;
-  box-shadow:0 20px 60px rgba(80,60,40,.10);
-}
-
-.small{
-  font-size:15px;
-  letter-spacing:.28em;
-  font-weight:300;
-}
-
-.hand{
-  font-family:"Homemade Apple", cursive;
-  font-size:30px;
-  line-height:1.7;
-  color:#8d8a61;
-}
-
-h1{
-  font-size:64px;
-  font-weight:300;
-  margin:42px 0 8px;
 }
 
 h2{
@@ -63,38 +166,6 @@ p{
   font-size:19px;
   line-height:2.1;
   margin:0;
-}
-
-input{
-  margin-top:42px;
-  width:240px;
-  border:none;
-  border-bottom:1px solid #b8a995;
-  background:transparent;
-  text-align:center;
-  padding:12px;
-  font-size:20px;
-  color:#75685b;
-}
-
-button{
-  margin-top:34px;
-  padding:15px 46px;
-  border-radius:999px;
-  border:1px solid #9d8b75;
-  background:transparent;
-  color:#75685b;
-  letter-spacing:.22em;
-  font-size:14px;
-}
-
-button.opened{
-  background:#aa987f;
-  color:#fff;
-}
-
-#book{
-  display:none;
 }
 
 .photo{
@@ -128,7 +199,7 @@ button.opened{
 
 .letter{
   max-width:360px;
-  background:#fbf8f1;
+  background:#fffdf9;
   border:1px solid #e4d8c9;
   padding:44px 26px;
 }
@@ -140,35 +211,39 @@ button.opened{
 }
 
 @media(max-width:480px){
-  h1{ font-size:56px; }
-  h2{ font-size:38px; }
-  p{ font-size:18px; }
+  .table{min-height:720px;}
+  .book{width:220px;height:300px;}
+  .title{font-size:44px;}
 }
 </style>
 </head>
 
 <body>
 
-<section class="cover">
-  <div class="small">fil memories</div>
+<div class="stage">
+  <div class="table">
+    <div class="book" id="bookCover">
+      <div class="cover">
+        <div class="brand">fil memories</div>
+        <h1 class="title">Hina</h1>
+        <div class="sub">first birthday</div>
+        <div class="flower">tiny miracles</div>
+      </div>
 
-  <h1>Hina</h1>
+      <div class="inside">
+        <div class="hand">
+          a year filled<br>
+          with tiny miracles
+        </div>
 
-  <div class="small">first birthday</div>
-
-  <p style="margin-top:48px;">2026.06.05</p>
-
-  <div class="hand" style="margin-top:60px;">
-    a year filled<br>
-    with tiny miracles
+        <input id="pw" placeholder="password">
+        <button onclick="openBook()">open book</button>
+      </div>
+    </div>
   </div>
+</div>
 
-  <input id="pw" placeholder="password">
-
-  <button id="openBtn" onclick="openBook()">open book</button>
-</section>
-
-<div id="book">
+<div id="pages">
 
 <section>
   <div class="hand">
@@ -216,19 +291,8 @@ button.opened{
 </section>
 
 <section>
-  <h2>gallery</h2>
-  <div class="grid">
-    <div class="photo">photo 07</div>
-    <div class="photo">photo 08</div>
-    <div class="photo">photo 09</div>
-    <div class="photo">photo 10</div>
-  </div>
-</section>
-
-<section>
   <div class="letter">
     <h2>A Letter<br>From Mama</h2>
-
     <p>
       Dear Hina,<br><br>
       Happy first birthday.<br><br>
@@ -250,7 +314,6 @@ button.opened{
     with all our love<br>
     fil photo studio
   </p>
-
   <button>download</button>
 </section>
 
@@ -259,10 +322,15 @@ button.opened{
 <script>
 function openBook(){
   const password = document.getElementById("pw").value;
+
   if(password === "hina"){
-    document.getElementById("book").style.display = "block";
-    document.getElementById("openBtn").classList.add("opened");
-    document.getElementById("book").scrollIntoView({behavior:"smooth"});
+    document.getElementById("bookCover").classList.add("open");
+
+    setTimeout(function(){
+      document.getElementById("pages").style.display = "block";
+      document.getElementById("pages").scrollIntoView({behavior:"smooth"});
+    },1200);
+
   }else{
     alert("合言葉が違います");
   }
