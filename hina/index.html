@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>fil memories | Hina</title>
+<title>fil memories</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Homemade+Apple&family=Noto+Serif+JP:wght@200;300&display=swap');
@@ -13,13 +13,13 @@
 body{
   margin:0;
   background:#fbfaf6;
-  color:#766f67;
+  color:#756f68;
   font-family:"Noto Serif JP",serif;
 }
 
 .page{
   min-height:100vh;
-  padding:70px 28px;
+  padding:72px 26px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -27,23 +27,40 @@ body{
   text-align:center;
 }
 
-.cover-img{
-  width:100%;
-  max-width:430px;
-  border-radius:2px;
-  box-shadow:0 20px 55px rgba(70,50,30,.16);
+/* 表紙 */
+.cover{
+  background:#f7f3ec;
 }
 
-.name{
-  margin-top:22px;
-  font-family:"Noto Serif JP",serif;
-  font-size:14px;
-  letter-spacing:.34em;
-  font-weight:200;
+.cover-wrap{
+  position:relative;
+  width:100%;
+  max-width:430px;
+}
+
+.cover-img{
+  width:100%;
+  display:block;
+  border-radius:3px;
+  box-shadow:0 22px 60px rgba(70,50,30,.18);
+}
+
+/* 表紙にHTMLで名前を重ねる */
+.cover-name{
+  position:absolute;
+  top:48%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-family:"Cormorant Garamond",serif;
+  font-size:22px;
+  letter-spacing:.28em;
+  font-weight:300;
+  color:#6f665d;
+  text-transform:lowercase;
 }
 
 .pass{
-  margin-top:44px;
+  margin-top:38px;
 }
 
 input{
@@ -54,8 +71,8 @@ input{
   text-align:center;
   padding:10px;
   font-size:15px;
-  letter-spacing:.2em;
-  color:#766f67;
+  letter-spacing:.18em;
+  color:#756f68;
   outline:none;
 }
 
@@ -66,27 +83,38 @@ button{
   font-family:"Cormorant Garamond",serif;
   font-size:18px;
   letter-spacing:.24em;
-  color:#766f67;
+  color:#756f68;
+  cursor:pointer;
 }
 
 #book{
   display:none;
 }
 
-.en-hand{
+/* 共通 */
+.hand{
   font-family:"Homemade Apple",cursive;
-  color:#7f8464;
-  font-size:20px;
-  line-height:1.7;
-  margin-bottom:42px;
+  color:#818668;
+  font-size:19px;
+  line-height:1.8;
+  margin-bottom:44px;
 }
 
 .en-title{
   font-family:"Cormorant Garamond",serif;
-  font-size:44px;
+  font-size:38px;
   font-weight:300;
-  letter-spacing:.03em;
-  margin:0 0 56px;
+  letter-spacing:.04em;
+  margin:0 0 58px;
+  color:#746d66;
+}
+
+.jp{
+  font-size:13px;
+  font-weight:200;
+  letter-spacing:.26em;
+  line-height:3.2;
+  color:#77716a;
 }
 
 .photo{
@@ -95,33 +123,15 @@ button{
   aspect-ratio:4/5;
   background:#ebe4da;
   border:1px solid #d8cdbf;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#b5ada5;
-  font-family:"Cormorant Garamond",serif;
-  font-size:18px;
-  letter-spacing:.24em;
-  margin-bottom:46px;
+  margin-bottom:50px;
   overflow:hidden;
-}
-
-.photo.wide{
-  aspect-ratio:4/3;
 }
 
 .photo img{
   width:100%;
   height:100%;
   object-fit:cover;
-}
-
-.jp{
-  font-size:14px;
-  font-weight:200;
-  letter-spacing:.28em;
-  line-height:3.1;
-  color:#77716a;
+  display:block;
 }
 
 .grid{
@@ -129,8 +139,8 @@ button{
   max-width:360px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-bottom:54px;
+  gap:18px;
+  margin-bottom:58px;
 }
 
 .grid .photo{
@@ -138,12 +148,38 @@ button{
   aspect-ratio:1/1.15;
 }
 
+.story-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:40px;
+  font-weight:300;
+  line-height:1.4;
+  color:#746d66;
+  margin-bottom:52px;
+}
+
+.spacer{
+  height:120px;
+}
+
 .letter{
   width:100%;
   max-width:360px;
   border:1px solid #ddd2c5;
-  padding:46px 24px;
+  padding:48px 25px;
   background:#fffdfa;
+}
+
+.download{
+  display:inline-block;
+  margin-top:36px;
+  padding:13px 36px;
+  border:1px solid #b8aa99;
+  border-radius:999px;
+  text-decoration:none;
+  color:#756f68;
+  font-family:"Cormorant Garamond",serif;
+  font-size:17px;
+  letter-spacing:.22em;
 }
 
 .logo{
@@ -161,19 +197,22 @@ button{
 }
 
 @media(max-width:480px){
-  .page{padding:64px 24px;}
-  .en-title{font-size:40px;margin-bottom:48px;}
-  .jp{font-size:13px;letter-spacing:.24em;}
+  .page{padding:66px 24px;}
+  .en-title{font-size:35px;margin-bottom:52px;}
+  .story-title{font-size:36px;}
+  .jp{font-size:12.5px;letter-spacing:.22em;}
+  .cover-name{font-size:20px;}
 }
 </style>
 </head>
 
 <body>
 
-<section class="page" id="cover">
-  <img class="cover-img" src="images/cover.jpg" alt="fil memories cover">
-
-  <div class="name">Hina</div>
+<section class="page cover">
+  <div class="cover-wrap">
+    <img class="cover-img" src="images/cover.jpg" alt="fil memories cover">
+    <div class="cover-name" id="coverName"></div>
+  </div>
 
   <div class="pass">
     <input id="pw" placeholder="password">
@@ -185,32 +224,37 @@ button{
 <div id="book">
 
 <section class="page">
-  <div class="en-hand">
+  <div class="story-title" id="storyTitle"></div>
+
+  <div class="hand">
     a year filled<br>
     with tiny miracles
   </div>
 
   <div class="photo">
-    main photo
+    <img src="images/photo01.jpg" alt="">
   </div>
 
   <div class="jp">
-    これは、ひなのはじめての１年のものがたり。<br><br>
+    これは、はじめての１年のものがたり。<br><br>
     ささやかな瞬間、やさしい笑顔、<br><br>
     ずっと大切にしたい思い出たちを、<br><br>
     ぎゅっと詰め込んで。
   </div>
 </section>
 
+<div class="spacer"></div>
+
 <section class="page">
   <h2 class="en-title">the beginning</h2>
 
   <div class="photo">
-    photo 01
+    <img src="images/photo02.jpg" alt="">
   </div>
 
   <div class="jp">
-    むかしむかし、ある小さな命が生まれました。<br><br>
+    むかしむかし、<br><br>
+    ある小さな命が生まれました。<br><br>
     それは、たくさんの愛に包まれた、<br><br>
     かけがえのない物語のはじまり。
   </div>
@@ -220,10 +264,10 @@ button{
   <h2 class="en-title">little smiles</h2>
 
   <div class="grid">
-    <div class="photo">photo 02</div>
-    <div class="photo">photo 03</div>
-    <div class="photo">photo 04</div>
-    <div class="photo">photo 05</div>
+    <div class="photo"><img src="images/photo03.jpg" alt=""></div>
+    <div class="photo"><img src="images/photo04.jpg" alt=""></div>
+    <div class="photo"><img src="images/photo05.jpg" alt=""></div>
+    <div class="photo"><img src="images/photo06.jpg" alt=""></div>
   </div>
 
   <div class="jp">
@@ -234,13 +278,15 @@ button{
 </section>
 
 <section class="page">
-  <div class="jp" style="margin-bottom:44px;">
+  <h2 class="en-title">tiny adventures</h2>
+
+  <div class="jp" style="margin-bottom:50px;">
     小さな冒険が、<br><br>
     世界をもっと広げてくれた。
   </div>
 
   <div class="photo">
-    photo 06
+    <img src="images/photo07.jpg" alt="">
   </div>
 
   <div class="jp">
@@ -254,20 +300,14 @@ button{
   <h2 class="en-title">mama's letter</h2>
 
   <div class="letter">
-    <div class="jp">
-      ひなちゃんへ<br><br>
-      生まれてきてくれてありがとう。<br><br>
-      あなたの笑顔も、泣き顔も、<br><br>
-      小さな成長のひとつひとつも、<br><br>
-      ママの大切な宝物です。<br><br>
-      これからも、ひなちゃんらしく<br><br>
-      すくすく大きくなってね。
-    </div>
+    <div class="jp" id="mamaLetter"></div>
   </div>
 </section>
 
 <section class="page">
-  <div class="en-hand">the end</div>
+  <div class="hand">the end</div>
+
+  <a class="download" href="images/download.zip" download>download</a>
 
   <div class="logo">fil memories</div>
   <div class="small">© fil memories. all rights reserved.</div>
@@ -276,10 +316,30 @@ button{
 </div>
 
 <script>
-function openBook(){
-  const password = document.getElementById("pw").value;
+/* ここだけ毎回変更 */
+const childName = "Hina";
+const password = "hina";
+const storyTitle = "Hina's<br>1st birthday story";
 
-  if(password === "hina"){
+const mamaLetter = `
+ひなちゃんへ<br><br>
+生まれてきてくれてありがとう。<br><br>
+あなたの笑顔も、泣き顔も、<br><br>
+小さな成長のひとつひとつも、<br><br>
+ママの大切な宝物です。<br><br>
+これからも、ひなちゃんらしく<br><br>
+すくすく大きくなってね。
+`;
+
+/* 表示 */
+document.getElementById("coverName").innerHTML = childName.toLowerCase();
+document.getElementById("storyTitle").innerHTML = storyTitle;
+document.getElementById("mamaLetter").innerHTML = mamaLetter;
+
+function openBook(){
+  const input = document.getElementById("pw").value;
+
+  if(input === password){
     document.getElementById("book").style.display = "block";
     document.getElementById("book").scrollIntoView({behavior:"smooth"});
   }else{
