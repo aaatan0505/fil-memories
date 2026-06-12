@@ -115,11 +115,19 @@ button,.download{
 }
 
 .message{
-  margin:20px auto 20px;
+  margin:20px auto 18px;
   font-size:10px;
   letter-spacing:.18em;
   line-height:1.8;
   color:#b0a79d;
+}
+
+.guide{
+  margin:0 auto 26px;
+  font-size:11px;
+  letter-spacing:.12em;
+  line-height:2.2;
+  color:#9d948b;
 }
 
 .gallery{
@@ -239,6 +247,12 @@ button,.download{
     a collection of precious moments
   </div>
 
+  <div class="guide">
+    Download all で全て保存できます。<br>
+    iPhoneではファイルアプリに保存されます。<br>
+    写真を長押しすると1枚ずつ保存も可能です。
+  </div>
+
   <a class="download" href="../photos/download.zip" download>
     Download all
   </a>
@@ -266,12 +280,10 @@ button,.download{
 </div>
 
 <script>
-/* ここだけ毎回変更 */
 const childName = "Hina";
 const password = "hina";
 const expireDate = "公開期限：2026/10/9 まで";
 
-/* 表示 */
 document.getElementById("childNameCover").innerHTML = childName;
 document.getElementById("childNameAlbum").innerHTML = childName;
 document.getElementById("expireDate").innerHTML = expireDate;
