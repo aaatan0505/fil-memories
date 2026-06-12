@@ -27,22 +27,15 @@ section{
   font-size:22px;
   letter-spacing:.28em;
   font-weight:300;
-  margin-bottom:70px;
+  margin-bottom:74px;
 }
 
 .name{
   font-family:"Cormorant Garamond",serif;
-  font-size:48px;
+  font-size:50px;
   font-weight:300;
   letter-spacing:.08em;
-  margin-bottom:20px;
-}
-
-.subtitle{
-  font-size:13px;
-  letter-spacing:.22em;
-  line-height:2.4;
-  color:#8a837b;
+  margin-bottom:28px;
 }
 
 .line{
@@ -50,6 +43,13 @@ section{
   height:1px;
   background:#d8cec5;
   margin:38px auto;
+}
+
+.subtitle{
+  font-size:13px;
+  letter-spacing:.22em;
+  line-height:2.5;
+  color:#8a837b;
 }
 
 input{
@@ -89,15 +89,7 @@ button,.download{
   font-size:42px;
   font-weight:300;
   letter-spacing:.06em;
-  margin-bottom:14px;
-}
-
-.message{
-  margin:34px auto 28px;
-  font-size:13px;
-  letter-spacing:.22em;
-  line-height:2.8;
-  color:#8a837b;
+  margin-bottom:24px;
 }
 
 .info{
@@ -105,7 +97,7 @@ button,.download{
   justify-content:center;
   gap:12px;
   flex-wrap:wrap;
-  margin:26px auto 18px;
+  margin:22px auto 24px;
 }
 
 .info span{
@@ -116,6 +108,18 @@ button,.download{
   letter-spacing:.12em;
   color:#8a837b;
   background:#fffdf9;
+}
+
+.info .share{
+  cursor:pointer;
+}
+
+.message{
+  margin:20px auto 20px;
+  font-size:10px;
+  letter-spacing:.18em;
+  line-height:1.8;
+  color:#b0a79d;
 }
 
 .gallery{
@@ -152,7 +156,6 @@ button,.download{
   margin-top:18px;
 }
 
-/* 拡大表示 */
 .lightbox{
   display:none;
   position:fixed;
@@ -191,7 +194,7 @@ button,.download{
 
 @media(max-width:480px){
   section{padding:70px 22px;}
-  .name{font-size:44px;}
+  .name{font-size:46px;}
   .album-title{font-size:38px;}
 }
 </style>
@@ -203,8 +206,6 @@ button,.download{
   <div class="brand">fil memories</div>
 
   <div class="name" id="childNameCover"></div>
-
-  <div class="subtitle" id="planNameCover"></div>
 
   <div class="line"></div>
 
@@ -225,18 +226,17 @@ button,.download{
 <section>
   <div class="brand">fil memories</div>
 
-  <div class="album-title" id="childNameAlbum"></div>
-
-  <div class="subtitle" id="planNameAlbum"></div>
+  <div class="album-title">
+    <span id="childNameAlbum"></span> 様のアルバム
+  </div>
 
   <div class="info">
-    <span id="shootDate"></span>
-    <span>password protected</span>
+    <span id="expireDate"></span>
+    <span class="share" onclick="copyUrl()">シェアURL</span>
   </div>
 
   <div class="message">
-    a collection of<br>
-    precious moments
+    a collection of precious moments
   </div>
 
   <a class="download" href="../photos/download.zip" download>
@@ -268,16 +268,13 @@ button,.download{
 <script>
 /* ここだけ毎回変更 */
 const childName = "Hina";
-const planName = "family photo";
 const password = "hina";
-const date = "2026.06.12";
+const expireDate = "公開期限：2026/10/9 まで";
 
 /* 表示 */
 document.getElementById("childNameCover").innerHTML = childName;
 document.getElementById("childNameAlbum").innerHTML = childName;
-document.getElementById("planNameCover").innerHTML = planName;
-document.getElementById("planNameAlbum").innerHTML = planName;
-document.getElementById("shootDate").innerHTML = date;
+document.getElementById("expireDate").innerHTML = expireDate;
 
 function openAlbum(){
   const input = document.getElementById("pw").value;
@@ -288,6 +285,11 @@ function openAlbum(){
   }else{
     alert("合言葉が違います");
   }
+}
+
+function copyUrl(){
+  navigator.clipboard.writeText(window.location.href);
+  alert("URLをコピーしました");
 }
 
 function openLightbox(src){
